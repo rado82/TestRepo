@@ -39,6 +39,9 @@ namespace
     }
   
   }
+  /*
+   * Algorithm for line drawing (DDA method) is adapted from URL : https://www.tutorialspoint.com/computer_graphics/pdf/line_generation_algorithm.pdf
+   */
   void drawLine(uint8_t* img, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1,  uint8_t* color, uint32_t ch, uint32_t w, uint32_t h )
   {
 
@@ -90,9 +93,9 @@ namespace
     
     for (uint32_t i = 1; i < numBins; i++) 
     {
-      drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), (uint32_t)histMapf[i-1], (uint32_t)binWidth * i,(uint32_t)( histMapf[i]), color[0], ch, w, h);
-      drawLine(histPlotImg.get(),(uint32_t) binWidth * (i-1), (uint32_t) histMapf[i-1 + 256],(uint32_t) binWidth * i,(uint32_t) histMapf[i + 256], color[1], ch, w, h);
-      drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), (uint32_t)histMapf[i-1 + 512],(uint32_t) binWidth * i, (uint32_t) histMapf[i + 512], color[2], ch, w, h);
+      drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), h - static_cast<uint32_t> (round(histMapf[i-1])), (uint32_t)binWidth * i,(uint32_t)( histMapf[i])), color[0], ch, w, h);
+      drawLine(histPlotImg.get(),(uint32_t) binWidth * (i-1), h - static_cast<uint32_t> (round( histMapf[i-1 + 256])),(uint32_t) binWidth * i, h - static_cast<uint32_t> (round(histMapf[i + 256])), color[1], ch, w, h);
+      drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), h - static_cast<uint32_t> (round(histMapf[i-1 + 512])),(uint32_t) binWidth * i, h - static_cast<uint32_t> (round( histMapf[i + 512])), color[2], ch, w, h);
     } 
  
     uint32_t error = lodepng::encode(outFilename, histPlotImg.get(), w, h, LodePNGColorType::LCT_RGB);
