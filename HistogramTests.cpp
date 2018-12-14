@@ -93,7 +93,7 @@ namespace
     
     for (uint32_t i = 1; i < numBins; i++) 
     {
-      drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), h - static_cast<uint32_t> (round(histMapf[i-1])), (uint32_t)binWidth * i,(uint32_t)( histMapf[i])), color[0], ch, w, h);
+      drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), h - static_cast<uint32_t> (round(histMapf[i-1])), (uint32_t)binWidth * i,h - static_cast<uint32_t> (round( histMapf[i])), color[0], ch, w, h);
       drawLine(histPlotImg.get(),(uint32_t) binWidth * (i-1), h - static_cast<uint32_t> (round( histMapf[i-1 + 256])),(uint32_t) binWidth * i, h - static_cast<uint32_t> (round(histMapf[i + 256])), color[1], ch, w, h);
       drawLine(histPlotImg.get(), (uint32_t)binWidth * (i-1), h - static_cast<uint32_t> (round(histMapf[i-1 + 512])),(uint32_t) binWidth * i, h - static_cast<uint32_t> (round( histMapf[i + 512])), color[2], ch, w, h);
     } 
